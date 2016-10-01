@@ -78,16 +78,16 @@ public sealed class TurnSystem:IReactiveSystem,ISetPools
             {
                 case GameTags.Food:
                     TestLoadConfig.log.Trace("TurnSystem RoleBehaviour Food.");
-                    move(pos);
                     sound(entity);
                     _pools.core.DestroyEntity(entity);
+                    move(pos);
                     updateFood(Res.foodPoints);
                     break;
                 case GameTags.Soda:
                     TestLoadConfig.log.Trace("TurnSystem Execute Soda.");
-                    move(pos);
                     sound(entity);
                     _pools.core.DestroyEntity(entity);
+                    move(pos);
                     updateHp(Res.sodaPoints);
                     break;
                 case GameTags.Enemy:
