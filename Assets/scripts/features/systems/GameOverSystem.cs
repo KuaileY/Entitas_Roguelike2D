@@ -26,6 +26,8 @@ public sealed class GameOverSystem:IReactiveSystem,ISetPools
     public void Execute(List<Entity> entities)
     {
         _pools.input.isProcessing = true;
+        _pools.input.CreateEntity().AddEfxSound(Res.audios.scavengers_die);
+        _pools.input.DestroyEntity(_pools.input.musicEntity);
         Singleton<ContextManager>.Instance.Pop();
         Singleton<ContextManager>.Instance.Push(new GameOvertContext());
 

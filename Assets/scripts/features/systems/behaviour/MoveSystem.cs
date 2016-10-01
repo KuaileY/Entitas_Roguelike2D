@@ -22,6 +22,7 @@ public sealed class MoveSystem : IReactiveSystem
     void Move(Entity entity)
     {
         _processing = true;
+        sound(entity); 
         entity.view.gameObject.transform.DOMove(new Vector2(entity.position.x, entity.position.y), 0.2f)
             .OnComplete(() =>
             {
@@ -34,6 +35,13 @@ public sealed class MoveSystem : IReactiveSystem
             });
 
     }
+
+    void sound(Entity entity)
+    {
+        if (entity.view.gameObject.tag != Res.player)
+            Pools.sharedInstance.input.CreateEntity().AddEfxSound(Res.audios.scavengers_footstep2);
+    }
+
 
 }
 

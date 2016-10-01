@@ -1,7 +1,7 @@
-﻿using UnityEngine;
-public class ViewController : MonoBehaviour
+﻿using Entitas;
+public sealed class UISystem : IInitializeSystem
 {
-    void Start()
+    public void Initialize()
     {
         Singleton<UIManager>.Create();
         Singleton<ContextManager>.Create();

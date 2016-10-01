@@ -42,11 +42,14 @@ class GameController:MonoBehaviour
             .Add(pools.core.CreateSystem(new GetHitSystem()))
             .Add(pools.core.CreateSystem(new AnimationSystem()))
             //render
+            .Add(pools.CreateSystem(new UISystem()))
             .Add(pools.core.CreateSystem(new AddViewSystem()))
             .Add(pools.board.CreateSystem(new AddViewSystem()))
             .Add(pools.core.CreateSystem(new RemoveViewSystem()))
             //property
             .Add(pools.core.CreateSystem(new HpSystem()))
+            //audio
+            .Add(pools.input.CreateSystem(new AudioSystem()))
             //destory
             .Add(pools.core.CreateSystem(new DestorySystem()))
             ;

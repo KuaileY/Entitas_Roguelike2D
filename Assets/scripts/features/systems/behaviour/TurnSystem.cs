@@ -77,15 +77,17 @@ public sealed class TurnSystem:IReactiveSystem,ISetPools
             switch (entity.view.gameObject.tag.ToEnum<GameTags>())
             {
                 case GameTags.Food:
-                    _pools.core.DestroyEntity(entity);
                     TestLoadConfig.log.Trace("TurnSystem RoleBehaviour Food.");
                     move(pos);
+                    sound(entity);
+                    _pools.core.DestroyEntity(entity);
                     updateFood(Res.foodPoints);
                     break;
                 case GameTags.Soda:
-                    _pools.core.DestroyEntity(entity);
                     TestLoadConfig.log.Trace("TurnSystem Execute Soda.");
                     move(pos);
+                    sound(entity);
+                    _pools.core.DestroyEntity(entity);
                     updateHp(Res.sodaPoints);
                     break;
                 case GameTags.Enemy:
@@ -125,6 +127,7 @@ public sealed class TurnSystem:IReactiveSystem,ISetPools
     void move(Vector2 pos)
     {
         TestLoadConfig.log.Trace("Player move");
+        Pools.sharedInstance.input.CreateEntity().AddEfxSound(Res.audios.scavengers_footstep1);
         //建立玩家角色下一步坐标
         _pools.core.controlableEntity.ReplacePosition((int)pos.x, (int)pos.y);
         _pools.core.controlableEntity.IsMove(true);
@@ -173,5 +176,14 @@ public sealed class TurnSystem:IReactiveSystem,ISetPools
         else
             entity.IsDestory(true);
     }
+
+    void sound(Entity entity)
+    {
+        if (entity.view.gameObject.tag == Res.soda)
+            Pools.sharedInstance.input.CreateEntity().AddEfxSound(Res.audios.scavengers_soda2);
+        else
+            Pools.sharedInstance.input.CreateEntity().AddEfxSound(Res.audios.scavengers_fruit2);
+    }
+
 }
 

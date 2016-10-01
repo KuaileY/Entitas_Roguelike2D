@@ -27,6 +27,7 @@ public sealed class AttackSystem : IReactiveSystem,ISetPool
     void Attack(Entity entity)
     {
         _processing = true;
+        sound(entity); 
         entity.AddAnimation(entity.view.gameObject.tag + Res.animations.Attack);
         var x = entity.view.gameObject.transform.position.x + entity.attack.dir.x;
         var y = entity.view.gameObject.transform.position.y + entity.attack.dir.y;
@@ -43,6 +44,13 @@ public sealed class AttackSystem : IReactiveSystem,ISetPool
 
     }
 
+    void sound(Entity entity)
+    {
+        if (entity.view.gameObject.tag == Res.player)
+            Pools.sharedInstance.input.CreateEntity().AddEfxSound(Res.audios.scavengers_chop1);
+        else
+            Pools.sharedInstance.input.CreateEntity().AddEfxSound(Res.audios.scavengers_chop2);
+    }
 
 }
 
